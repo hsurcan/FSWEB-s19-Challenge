@@ -1,0 +1,22 @@
+server:
+  port: 3000
+
+spring:
+  application:
+    name: twitter-api
+  datasource:
+    url: jdbc:postgresql://localhost:5432/twitterdb
+    username: postgres
+    password:
+    driver-class-name: org.postgresql.Driver
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+    properties:
+      hibernate:
+        format_sql: true
+
+jwt:
+  secret: dGhpc0lzQVZlcnlMb25nQW5kU2VjdXJlU2VjcmV0S2V5Rm9ySnd0VG9rZW5HZW5lcmF0aW9uMTIzNDU2Nzg5MA==
+  expiration-ms: 86400000
