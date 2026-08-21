@@ -6,8 +6,10 @@ spring:
     name: twitter-api
   datasource:
     url: jdbc:postgresql://localhost:5432/twitterdb
-    username: postgres
-    password:
+    # Postgres.app kullaniyorsan: kullanici adin Mac kullanici adindir, sifre yoktur.
+    # Farkli bir kurulumda DB_USERNAME / DB_PASSWORD ortam degiskenleriyle ezebilirsin.
+    username: ${DB_USERNAME:hirasurcan}
+    password: ${DB_PASSWORD:}
     driver-class-name: org.postgresql.Driver
   jpa:
     hibernate:
@@ -18,5 +20,5 @@ spring:
         format_sql: true
 
 jwt:
-  secret: dGhpc0lzQVZlcnlMb25nQW5kU2VjdXJlU2VjcmV0S2V5Rm9ySnd0VG9rZW5HZW5lcmF0aW9uMTIzNDU2Nzg5MA==
+  secret: ${JWT_SECRET:dGhpc0lzQVZlcnlMb25nQW5kU2VjdXJlU2VjcmV0S2V5Rm9ySnd0VG9rZW5HZW5lcmF0aW9uMTIzNDU2Nzg5MA==}
   expiration-ms: 86400000
