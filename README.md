@@ -1,30 +1,36 @@
-# FSWEB-s19-Challenge — Twitter API
+# 🐦 Twitter API Backend & Integration (FSWEB Sprint 19 Challenge)
 
-Spring Boot 3.2.5 · Java 17 · PostgreSQL · Spring Security (JWT) · React (frontend/ klasöründe, port 3200)
+Bu proje, **Workintech FSWEB Sprint 19 Challenge** kapsamında geliştirilmiş, Twitter (X) platformunun temel işlevlerini simüle eden robust bir **Spring Boot RESTful API** backend servisi ve ona bağlı **React** frontend entegrasyonudur.
 
-## Açılış (IntelliJ)
-1. IntelliJ → File → Open → BU klasörü seç (pom.xml kökte).
-2. "Trust Project" de; Maven senkronizasyonunun bitmesini bekle (alt çubuk).
-3. SDK olarak JDK 17 seçili olmalı (File → Project Structure → Project).
+Sistem; Katmanlı Mimari (*Controller/Service/Repository/Entity*), Spring Security tabanlı yetkilendirme, Global Hata Yönetimi (*Global Exception Handling*), Bean Validation ve PostgreSQL veritabanı ilişkileri göz önünde bulundurularak inşa edilmiştir.
 
-## Veritabanı (Postgres.app)
-1. postgresapp.com → indir → Initialize.
-2. Uygulama içinden `twitterdb` adında veritabanı oluştur
-   (veya psql'de: CREATE DATABASE twitterdb;).
-3. application.yml varsayılanları Postgres.app'e göredir: kullanıcı = Mac
-   kullanıcı adın, şifre boş. Farklıysa DB_USERNAME / DB_PASSWORD ortam
-   değişkenlerini Run Configuration'a ekle.
+---
 
-## Çalıştırma
-- TwitterApiApplication → yeşil ok. Tablolar ilk açılışta otomatik kurulur (ddl-auto: update).
-- İlk test:
-  curl -X POST http://localhost:3000/register -H "Content-Type: application/json" \
-    -d '{"firstName":"Hira","lastName":"Surcan","username":"hira","email":"hira@test.com","password":"gizli123"}'
+## 🛠️ Teknolojiler ve Araçlar
 
-## Frontend
-cd frontend && npm install && npm run dev  (http://localhost:3200)
+* **Java 17+**
+* **Spring Boot 3.x**
+  * Spring Data JPA
+  * Spring Security
+  * Spring Validation
+* **PostgreSQL** (Veritabanı)
+* **React** (Frontend - Port `3200`)
+* **JUnit 5 & Mockito** (Unit Testler)
+* **Maven / Gradle**
+* **Lombok**
 
-## Endpointler
-POST /register, /login (açık) · POST/GET/PUT/DELETE /tweet... · POST /comment,
-PUT/DELETE /comment/{id} · POST /like, /dislike · POST /retweet — ayrıntı ve
-kurallar kod içi yorumlarda.
+---
+
+## 🏗️ Mimari Yapı ve Tasarım
+
+Proje, sürdürülebilirlik ve test edilebilirlik ilkelerine uygun olarak katmanlı mimari (*Layered Architecture*) prensiplerine dayanır:
+
+```text
+src/main/java/com/workintech/twitter/
+├── config/          # Spring Security, CORS ve Global Bean Yapılandırmaları
+├── controller/      # HTTP Requestlerini karşılayan Endpoint Katmanı
+├── dto/             # Data Transfer Objects (Request/Response şablonları)
+├── entity/          # PostgreSQL Veritabanı Varlıkları (User, Tweet, Comment, Like, Retweet)
+├── exception/       # Custom Exception Sınıfları ve @ControllerAdvice Global Exception Handler
+├── repository/      # Spring Data JPA Repository Arayüzleri
+└── service/         # İş Mantığı (Business Logic) Katmanı
